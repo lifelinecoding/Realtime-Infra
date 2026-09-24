@@ -1,23 +1,14 @@
 
-import { useEffect } from "react"
-import { io } from "socket.io-client"
+import { useSocket } from "./hooks/useSocket"
 
 function App() {
 
-  useEffect(() => {
-    const socket = io("http://localhost:3000");
-    socket.on("connect" , () =>{
-      console.log("Connecting to server");
-    })
+  const socket = useSocket();
 
-    socket.on("message", (data) => {
-      console.log(data);
-    })
-
-    return () =>{
-      // socket.disconnect();
-    }
-  }, []);
+  socket.on("message", (data) => {
+    console.log(data);
+    socket.emit("ack", "Badhiya hu bhai");
+  });
 
   return (
     <>

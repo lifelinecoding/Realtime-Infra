@@ -26,6 +26,9 @@ server.on("connection", (socket) => {
   console.log("A User connected: ", socket.id);
 
   socket.emit("message", "Kaise ho bhai");
+  socket.on("ack", (data) => {
+    console.log(data);
+  })
 
 });
 
